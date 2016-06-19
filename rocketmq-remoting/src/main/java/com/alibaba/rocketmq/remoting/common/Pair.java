@@ -19,7 +19,7 @@ package com.alibaba.rocketmq.remoting.common;
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
-public class Pair<T1, T2> {
+public class Pair<T1, T2> {//// TODO: 6/19/16 自己搞的Pair
     private T1 object1;
     private T2 object2;
 

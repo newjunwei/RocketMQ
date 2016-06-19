@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.alibaba.rocketmq.common.SystemClock;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -108,7 +109,7 @@ public class NamesrvStartup {
                     InputStream in = new BufferedInputStream(new FileInputStream(file));
                     properties = new Properties();
                     properties.load(in);
-                    MixAll.properties2Object(properties, namesrvConfig);
+                    MixAll.properties2Object(properties, namesrvConfig);//// TODO: 6/7/16 此读配置方式值得借鉴
                     MixAll.properties2Object(properties, nettyServerConfig);
                     System.out.println("load config properties file OK, " + file);
                     in.close();
@@ -130,7 +131,7 @@ public class NamesrvStartup {
                 System.exit(-2);
             }
 
-            // 初始化Logback
+            // 初始化Logback // TODO: 6/7/16 手动制定logback.xml 文件
             LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
             JoranConfigurator configurator = new JoranConfigurator();
             configurator.setContext(lc);
@@ -149,7 +150,7 @@ public class NamesrvStartup {
                 controller.shutdown();
                 System.exit(-3);
             }
-
+            // TODO: 6/7/16 进程退出调用hook
             Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
                 private volatile boolean hasShutdown = false;
                 private AtomicInteger shutdownTimes = new AtomicInteger(0);

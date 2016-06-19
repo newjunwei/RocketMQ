@@ -310,14 +310,14 @@ public class MonitorService {
 
 
     public static void main0(String[] args, RPCHook rpcHook) throws MQClientException {
+        MonitorConfig config = new MonitorConfig();
+        config.setNamesrvAddr("localhost:9876");
         final MonitorService monitorService =
-                new MonitorService(new MonitorConfig(), new DefaultMonitorListener(), rpcHook);
+                new MonitorService(config, new DefaultMonitorListener(), rpcHook);
         monitorService.start();
 
         Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
             private volatile boolean hasShutdown = false;
-
-
             @Override
             public void run() {
                 synchronized (this) {

@@ -56,7 +56,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingSysResponseCode;
 public abstract class NettyRemotingAbstract {
     private static final Logger plog = LoggerFactory.getLogger(RemotingHelper.RemotingLogName);
 
-    // 信号量，Oneway情况会使用，防止本地Netty缓存请求过多
+    // 信号量，Oneway情况会使用，防止本地Netty缓存请求过多 // TODO: 6/19/16 ??
     protected final Semaphore semaphoreOneway;
 
     // 信号量，异步调用情况会使用，防止本地Netty缓存请求过多
@@ -85,7 +85,7 @@ public abstract class NettyRemotingAbstract {
     public void putNettyEvent(final NettyEvent event) {
         this.nettyEventExecuter.putNettyEvent(event);
     }
-
+    //TODO: 6/19/16 内部类
     class NettyEventExecuter extends ServiceThread {
         private final LinkedBlockingQueue<NettyEvent> eventQueue = new LinkedBlockingQueue<NettyEvent>();
         private final int MaxSize = 10000;

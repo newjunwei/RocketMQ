@@ -61,7 +61,7 @@ import com.alibaba.rocketmq.tools.command.topic.TopicRouteSubCommand;
 import com.alibaba.rocketmq.tools.command.topic.TopicStatusSubCommand;
 import com.alibaba.rocketmq.tools.command.topic.UpdateOrderConfCommand;
 import com.alibaba.rocketmq.tools.command.topic.UpdateTopicSubCommand;
-import com.alibaba.rocketmq.tools.github.SyncDocsToGithubSubCommand;
+//import com.alibaba.rocketmq.tools.github.SyncDocsToGithubSubCommand;
 
 
 /**
@@ -112,7 +112,7 @@ public class MQAdminStartup {
         initCommand(new CheckMsgSubCommand());
         initCommand(new StatsAllSubCommand());
 
-        initCommand(new SyncDocsToGithubSubCommand());
+//        initCommand(new SyncDocsToGithubSubCommand());
     }
 
 

@@ -8,7 +8,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingSerializable;
 
 
 public class TopicConfigSerializeWrapper extends RemotingSerializable {
-    private ConcurrentHashMap<String, TopicConfig> topicConfigTable =
+    private ConcurrentHashMap<String/*topic*/, TopicConfig> topicConfigTable =
             new ConcurrentHashMap<String, TopicConfig>();
     private DataVersion dataVersion = new DataVersion();
 

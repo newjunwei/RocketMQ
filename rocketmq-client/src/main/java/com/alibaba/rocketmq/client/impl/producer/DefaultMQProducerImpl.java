@@ -160,7 +160,7 @@ public class DefaultMQProducerImpl implements MQProducerInner {
         this.start(true);
     }
 
-
+    // TODO: 6/8/16 肯定得跟name server说点啥:register producer ...
     public void start(final boolean startFactory) throws MQClientException {
         switch (this.serviceState) {
         case CREATE_JUST:

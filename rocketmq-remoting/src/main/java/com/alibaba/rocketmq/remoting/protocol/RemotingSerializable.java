@@ -25,7 +25,7 @@ import com.alibaba.fastjson.JSON;
  * @author shijia.wxr<vintage.wang@gmail.com>
  * @since 2013-7-13
  */
-public abstract class RemotingSerializable {
+public abstract class RemotingSerializable {// TODO: 6/7/16 此序列化封装方式值得借鉴
     public String toJson() {
         return toJson(false);
     }

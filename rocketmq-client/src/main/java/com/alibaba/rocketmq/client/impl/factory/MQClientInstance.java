@@ -122,7 +122,7 @@ public class MQClientInstance {
 
     private final ConsumerStatsManager consumerStatsManager;
 
-
+    // TODO: 6/8/16 client 包含的东西很真不少
     public MQClientInstance(ClientConfig clientConfig, int instanceIndex, String clientId, RPCHook rpcHook) {
         this.clientConfig = clientConfig;
         this.instanceIndex = instanceIndex;

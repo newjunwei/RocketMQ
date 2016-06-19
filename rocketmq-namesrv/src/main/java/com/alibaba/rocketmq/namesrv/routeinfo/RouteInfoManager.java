@@ -55,8 +55,8 @@ import com.alibaba.rocketmq.remoting.common.RemotingUtil;
  */
 public class RouteInfoManager {
     private static final Logger log = LoggerFactory.getLogger(LoggerName.NamesrvLoggerName);
-    private final ReadWriteLock lock = new ReentrantReadWriteLock();
-    private final HashMap<String/* topic */, List<QueueData>> topicQueueTable;
+    private final ReadWriteLock lock = new ReentrantReadWriteLock();// TODO: 6/7/16 可重入读写锁，如何保护数据读写的线程安全？
+    private final HashMap<String/* topic */, List<QueueData>> topicQueueTable;// TODO: 6/7/16 注释方式值得借鉴
     private final HashMap<String/* brokerName */, BrokerData> brokerAddrTable;
     private final HashMap<String/* clusterName */, Set<String/* brokerName */>> clusterAddrTable;
     private final HashMap<String/* brokerAddr */, BrokerLiveInfo> brokerLiveTable;
@@ -118,7 +118,7 @@ public class RouteInfoManager {
     /**
      * @return 如果是slave，则返回master的ha地址
      */
-    public RegisterBrokerResult registerBroker(//
+    public RegisterBrokerResult registerBroker(// TODO: 6/7/16 标注参数序号利于赋值？
             final String clusterName,// 1
             final String brokerAddr,// 2
             final String brokerName,// 3
@@ -159,7 +159,7 @@ public class RouteInfoManager {
 
                 // 更新Topic信息
                 if (null != topicConfigWrapper //
-                        && MixAll.MASTER_ID == brokerId) {
+                        && MixAll.MASTER_ID == brokerId) {// TODO: 6/7/16 master id 为 brokerId为0 的broker
                     if (this.isBrokerTopicConfigChanged(brokerAddr, topicConfigWrapper.getDataVersion())//
                             || registerFirst) {
                         ConcurrentHashMap<String, TopicConfig> tcTable =

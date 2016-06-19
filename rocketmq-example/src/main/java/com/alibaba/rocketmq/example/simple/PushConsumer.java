@@ -24,6 +24,7 @@ import com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently
 import com.alibaba.rocketmq.client.exception.MQClientException;
 import com.alibaba.rocketmq.common.consumer.ConsumeFromWhere;
 import com.alibaba.rocketmq.common.message.MessageExt;
+import com.alibaba.rocketmq.common.protocol.heartbeat.MessageModel;
 
 
 public class PushConsumer {
@@ -38,23 +39,24 @@ public class PushConsumer {
          * 注意：ConsumerGroupName需要由应用来保证唯一
          */
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("CID_001");
-
+//        consumer.setNamesrvAddr("localhost:9876");
+        consumer.setNamesrvAddr("172.31.101.12:9876;172.31.101.13:9876");
         /**
          * 订阅指定topic下tags分别等于TagA或TagC或TagD
          */
-        consumer.subscribe("TopicTest1", "TagA || TagC || TagD");
+        consumer.subscribe("TopicTest1", "TagA");
         /**
          * 订阅指定topic下所有消息<br>
          * 注意：一个consumer对象可以订阅多个topic
          */
-        consumer.subscribe("TopicTest2", "*");
-        consumer.subscribe("TopicTest3", "*");
+//        consumer.subscribe("TopicTest2", "*");
+//        consumer.subscribe("TopicTest3", "*");
 
         /**
          * 设置Consumer第一次启动是从队列头部开始消费还是队列尾部开始消费<br>
          * 如果非第一次启动，那么按照上次消费的位置继续消费
          */
-        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
+        consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
 
@@ -64,24 +66,22 @@ public class PushConsumer {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs,
                     ConsumeConcurrentlyContext context) {
-                System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + msgs);
+                String body = new String(msgs.get(0).getBody());
+                System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + body);
 
-                MessageExt msg = msgs.get(0);
-                if (msg.getTopic().equals("TopicTest1")) {
-                    // 执行TopicTest1的消费逻辑
-                    if (msg.getTags() != null && msg.getTags().equals("TagA")) {
-                        // 执行TagA的消费
-                    }
-                    else if (msg.getTags() != null && msg.getTags().equals("TagC")) {
-                        // 执行TagC的消费
-                    }
-                    else if (msg.getTags() != null && msg.getTags().equals("TagD")) {
-                        // 执行TagD的消费
-                    }
-                }
-                else if (msg.getTopic().equals("TopicTest2")) {
-                    // 执行TopicTest2的消费逻辑
-                }
+//                MessageExt msg = msgs.get(0);
+//                if (msg.getTopic().equals("TopicTest1")) {
+//                    // 执行TopicTest1的消费逻辑
+//                    if (msg.getTags() != null && msg.getTags().equals("TagA")) {
+//                        // 执行TagA的消费
+//                    } else if (msg.getTags() != null && msg.getTags().equals("TagC")) {
+//                        // 执行TagC的消费
+//                    } else if (msg.getTags() != null && msg.getTags().equals("TagD")) {
+//                        // 执行TagD的消费
+//                    }
+//                } else if (msg.getTopic().equals("TopicTest2")) {
+//                    // 执行TopicTest2的消费逻辑
+//                }
 
                 return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
             }

@@ -25,7 +25,7 @@ import com.alibaba.rocketmq.remoting.protocol.RemotingSerializable;
  * 
  * @author shijia.wxr<vintage.wang@gmail.com>
  */
-public class DataVersion extends RemotingSerializable {
+public class DataVersion extends RemotingSerializable {//可以借鉴
     private long timestatmp = System.currentTimeMillis();
     private AtomicLong counter = new AtomicLong(0);
 
