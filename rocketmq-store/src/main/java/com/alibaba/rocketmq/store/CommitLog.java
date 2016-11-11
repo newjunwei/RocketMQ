@@ -236,7 +236,7 @@ public class CommitLog {
             // 1 TOTALSIZE
             int totalSize = byteBuffer.getInt();
 
-            // 2 MAGICCODE
+            // 2 MAGICCODE // TODO: 6/19/16 协议里面常见的mgic code
             int magicCode = byteBuffer.getInt();
             switch (magicCode) {
             case MessageMagicCode:

@@ -31,9 +31,11 @@ public class MessageExtBrokerInner extends MessageExt {
     private long tagsCode;
 
 
+
     /**
      * 目前只支持单个标签的过滤
      */
+    // TODO: 6/19/16 string hashcode 做tags的hashcode
     public static long tagsString2tagsCode(final TopicFilterType filter, final String tags) {
         if (null == tags || tags.length() == 0)
             return 0;

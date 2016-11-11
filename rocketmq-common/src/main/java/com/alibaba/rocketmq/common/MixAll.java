@@ -255,7 +255,7 @@ public class MixAll {
         printObjectProperties(log, object, false);
     }
 
-
+    //注解的用途
     public static void printObjectProperties(final Logger log, final Object object,
             final boolean onlyImportantField) {
         Field[] fields = object.getClass().getDeclaredFields();

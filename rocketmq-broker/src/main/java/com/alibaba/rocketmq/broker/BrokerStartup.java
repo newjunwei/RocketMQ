@@ -56,7 +56,7 @@ public class BrokerStartup {
     public static String configFile = null;
     public static Logger log;
 
-
+    // TODO: 6/20/16  commons-cli 好用的命令行工具
     public static Options buildCommandlineOptions(final Options options) {
         Option opt = new Option("c", "configFile", true, "Broker config properties file");
         opt.setRequired(false);
@@ -142,7 +142,7 @@ public class BrokerStartup {
                     configFile = file;
                     InputStream in = new BufferedInputStream(new FileInputStream(file));
                     properties = new Properties();
-                    properties.load(in);
+                    properties.load(in);//读取配置文件
                     MixAll.properties2Object(properties, brokerConfig);
                     MixAll.properties2Object(properties, nettyServerConfig);
                     MixAll.properties2Object(properties, nettyClientConfig);
